@@ -447,7 +447,7 @@ public static class BubbleManager
 		return numOfFall;
 	}
 
-	public static void ResetBurstCounter()
+	public static void ResetCounter()
 	{
 		numOfBurst = 0;
 		numOfShoot = 0;

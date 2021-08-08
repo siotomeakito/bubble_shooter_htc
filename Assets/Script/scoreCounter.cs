@@ -13,12 +13,14 @@ public class scoreCounter : MonoBehaviour
 
 	void Awake()
 	{
-		burstCount = 0;
-		fallCount = 0;
-		shootCount = 0;
-		sumScore = 0;
+		resetScore();
 
 		myGameState = GameManager.GetGameState();
+	}
+
+	void OnEnable()
+	{
+		resetScore();
 	}
 
 	void Update()
@@ -43,9 +45,7 @@ public class scoreCounter : MonoBehaviour
 		switch (GameManager.GetGameState())
 		{
 			case GameManager.GameState.setting:
-				burstCount = 0;
-				fallCount = 0;
-				shootCount = 0;
+				resetScore();
 				break;
 			case GameManager.GameState.playing:
 				break;
@@ -77,5 +77,16 @@ public class scoreCounter : MonoBehaviour
 	{
 		return sumScore;
 	}
-	
+
+	public void resetScore()
+	{
+		burstCount = 0;
+		fallCount = 0;
+		shootCount = 0;
+		sumScore = 0;
+		GameManager.SetUserScore(0);
+		BubbleManager.ResetCounter();
+		GetComponent<Text>().text = "" + 0;
+		return;
+	}
 }

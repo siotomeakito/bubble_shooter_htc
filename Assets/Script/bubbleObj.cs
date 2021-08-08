@@ -129,9 +129,21 @@ public class bubbleObj : bubbleUI
 			return;
 		}
 
+		bubbleObj bubbleObjTemp = _collision.gameObject.GetComponent<bubbleObj>();
+
+		if (bubbleObjTemp.getBubbleState() != bubbleState.staying)
+		{
+			return;
+		}
+
+		if (bubbleObjTemp.getID() < 0 || bubbleObjTemp.getID() >= BubbleManager.bubbleNum)
+		{
+			return;
+		}
+
 		transform.parent = _collision.transform.parent;     // Must be before becomeStayingBubble()
 
-		becomeStayingBubble(correctPosition(_collision.gameObject.GetComponent<bubbleObj>()));
+		becomeStayingBubble(correctPosition(bubbleObjTemp));
 		BubbleManager.MatchBubble(getID());
 
 		if (transform.parent.GetComponent<bubblePile>()) {
