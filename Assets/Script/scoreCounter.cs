@@ -9,56 +9,21 @@ public class scoreCounter : MonoBehaviour
 	private int scoreOfBurstOneBubble = 100, scoreOfFallOneBubble = 50, scoreOfShootOneBubble = 10;
 	private int burstCount, fallCount, shootCount, sumScore;
 
-	private GameManager.GameState myGameState;
-
 	void Awake()
-	{
-		resetScore();
-
-		myGameState = GameManager.GetGameState();
-	}
-
-	void OnEnable()
 	{
 		resetScore();
 	}
 
 	void Update()
     {
-		stateSwitch();
-
-		if (myGameState == GameManager.GameState.playing && getCounter())
+		if (getCounter())
 		{
 			sumScore = burstCount * scoreOfBurstOneBubble + fallCount * scoreOfFallOneBubble + shootCount * scoreOfShootOneBubble;
 			GetComponent<Text>().text = "" + sumScore;
 			GameManager.SetUserScore(sumScore);
 		}
     }
-
-	private void stateSwitch()
-	{
-		if (GameManager.GetGameState() == myGameState)
-		{
-			return;
-		}
-
-		switch (GameManager.GetGameState())
-		{
-			case GameManager.GameState.setting:
-				resetScore();
-				break;
-			case GameManager.GameState.playing:
-				break;
-			case GameManager.GameState.pausing:
-				break;
-			case GameManager.GameState.ending:
-				break;
-		}
-
-		myGameState = GameManager.GetGameState();
-		return;
-	}
-
+	
 	private bool getCounter()
 	{
 		if (shootCount == BubbleManager.GetNumOfShoot() && burstCount == BubbleManager.GetNumOfBurst() && fallCount == BubbleManager.GetNumOfFall())

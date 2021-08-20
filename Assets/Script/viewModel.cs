@@ -8,6 +8,7 @@ public class viewModel : MonoBehaviour
 	public bubbleLauncher myBubbleLauncher;
 	public bubblePile myBubblePile;
 	public shooterController myShooterController;
+	public scoreCounter score;
 	public Canvas settingUI;
 	public Canvas playingUI;
 	public Canvas pausingUI;
@@ -44,6 +45,7 @@ public class viewModel : MonoBehaviour
 					playingUI.gameObject.SetActive(false);
 					pausingUI.gameObject.SetActive(false);
 					endingUI.gameObject.SetActive(false);
+					score.resetScore();
 					if (backGround)
 					{
 						backGround.sortingOrder = 20;
@@ -173,6 +175,9 @@ public class viewModel : MonoBehaviour
 				break;
 			case 2:
 				myBubblePile.setCompressSpeedLevel(bubblePile.compressLevel.hard);
+				break;
+			case 3:
+				myBubblePile.setCompressSpeedLevel(bubblePile.compressLevel.extreme);
 				break;
 		}
 	}

@@ -38,12 +38,7 @@ public class shooterController : MonoBehaviour
 
 		if (myGameState == GameManager.GameState.playing)
 		{
-			Vector2 myDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-			float myAngle = Mathf.Atan2(myDirection.y, myDirection.x) * Mathf.Rad2Deg - 90;
-			if (myAngle >= -maxAngle && myAngle <= maxAngle)
-			{
-				transform.rotation = Quaternion.AngleAxis(myAngle, Vector3.forward);
-			}
+			shooterRotation();
 		}
 	}
 
@@ -70,4 +65,13 @@ public class shooterController : MonoBehaviour
 		return;
 	}
 
+	public void shooterRotation()
+	{
+		Vector2 myDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+		float myAngle = Mathf.Atan2(myDirection.y, myDirection.x) * Mathf.Rad2Deg - 90;
+		if (myAngle >= -maxAngle && myAngle <= maxAngle)
+		{
+			transform.rotation = Quaternion.AngleAxis(myAngle, Vector3.forward);
+		}
+	}
 }

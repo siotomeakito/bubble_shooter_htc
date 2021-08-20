@@ -14,10 +14,10 @@ public class bubblePile : MonoBehaviour
 
 	public enum compressLevel
 	{
-		easy, normal, hard
+		easy, normal, hard, extreme
 	}
 	public compressLevel speedLevel;
-	private float[] compressSpeed = { 0.05f, 0.1f, 0.2f };
+	private float[] compressSpeed = { 0.05f, 0.1f, 0.15f, 0.2f };
 
 	public enum bubbleTypeLevel
 	{
@@ -128,6 +128,14 @@ public class bubblePile : MonoBehaviour
 		{
 			return;
 		}
+
+		// ¥~±¾
+		if (GameManager.GetUserName() == "VIP999")
+		{
+			_bubble.setBubbleType(bubbleUI.bubbleType.special_0, allBubbleType[(int)bubbleUI.bubbleType.special_0]);
+			return;
+		}
+		// ^__^
 
 		if (Random.Range(0f, 1f) < probabilityOfSpecial)
 		{

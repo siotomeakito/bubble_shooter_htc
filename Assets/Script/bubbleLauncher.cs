@@ -53,8 +53,9 @@ public class bubbleLauncher : MonoBehaviour
 
 		if (myGameState == GameManager.GameState.playing)
 		{
-			if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+			if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && mainShooter)
 			{
+				mainShooter.shooterRotation();
 				shootBubble(mainShooter.transform.rotation.eulerAngles.z, mainShooter.getSpeed());
 			}
 
@@ -100,8 +101,10 @@ public class bubbleLauncher : MonoBehaviour
 		readyBubble.gameObject.SetActive(true);
 		nextBubble.setBubbleState(bubbleUI.bubbleState.next);
 		randomBubble(ref nextBubble);
+		addSpecial(ref nextBubble);
 		readyBubble.setBubbleState(bubbleUI.bubbleState.ready);
 		randomBubble(ref readyBubble);
+		addSpecial(ref readyBubble);
 		return;
 	}
 	
@@ -144,6 +147,14 @@ public class bubbleLauncher : MonoBehaviour
 		{
 			return;
 		}
+
+		// ¥~±¾
+		if (GameManager.GetUserName() == "VIP666")
+		{
+			_bubble.setBubbleType(bubbleUI.bubbleType.special_1, allBubbleType[(int)bubbleUI.bubbleType.special_1]);
+			return;
+		}
+		// ^__^
 
 		if (Random.Range(0f, 1f) < probabilityOfSpecial)
 		{
